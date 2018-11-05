@@ -1,0 +1,69 @@
+{
+	"variables": [],
+	"info": {
+		"name": "elasticSearch",
+		"_postman_id": "b7a7c417-4a4f-9eb8-7681-91055ebad804",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "初始",
+			"request": {
+				"url": "localhost:9200",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "简单搜索",
+			"request": {
+				"url": "localhost:9200/_search",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "停止本地节点",
+			"request": {
+				"url": "localhost:9200/_cluster/nodes/_local/_shutdown",
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "停止所有节点",
+			"request": {
+				"url": "localhost:9201/_shutdown",
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": "测试失败了，报错503\n{\n    \"error\": \"MasterNotDiscoveredException[waited for [30s]]\",\n    \"status\": 503\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "创建索引",
+			"request": {
+				"url": "localhost:9202/wf_mds_org/hah",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"settings\":{\n\t\"number_of_shards\":1,\n\t\"number_of_replicas\":0,\n\t\"index.refresh_interval\":\"-1\",\n\t\"index.translog.flush_threshold_ops\":\"100000\"\n},\n\"mappings\":{\n\t\"org\":{\n\t\t\"_all\":{\"analyzer\":\"like\"},\n\t\t\"_source\":{\"compress\":true},\n\t\t\"_properties\":{}\n\t}\n}\n}\n//还有很多但是我懒得写了"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
